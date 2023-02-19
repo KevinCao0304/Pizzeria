@@ -1,0 +1,62 @@
+<div class="modal-body">
+  <div class="container">
+    <form [formGroup]="pizzaForm"  class="row g-3" #formDir="ngForm" (submit)="save()">
+  
+      <div>
+  
+        <div class="cross-validation" [class.cross-validation-error]="pizzaForm.errors?.['identityRevealed'] && (pizzaForm.touched || pizzaForm.dirty)">
+          <div class="form-group">
+            <label for="pizzaName">pizzaName</label>
+            <input type="text" id="pizzaName" class="form-control"
+            [(ngModel)]="pizza.pizzaName" maxlength="50"
+                  formControlName="pizzaName" required>
+            <div *ngIf="pizzaName.invalid && (pizzaName.dirty || pizzaName.touched)"
+                class="alert alert-danger">
+  
+              <div *ngIf="pizzaName.errors?.['required']">
+                pizzaName is required.
+              </div>
+
+            </div>
+          </div>
+  
+          <div class="form-group">
+            <label for="price">price</label>
+            <input type="text" id="price" class="form-control"
+            [(ngModel)]="pizza!.price"  maxlength="5" 
+                  formControlName="price" required>
+            <div *ngIf="price.invalid && (price.dirty || price.touched)"
+                class="alert alert-danger">
+  
+              <div *ngIf="price.errors?.['required']">
+                price is required.
+              </div>
+              <div *ngIf="price.errors?.['pattern']">
+                Invalid input.
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-md-4"  *ngFor="let topping of pizza.pizzaToppings">
+        <label  class="form-label">{{topping.toppingName}}</label>
+        <!-- <div  class="form-label">{{topping.qty}}</div>
+        <input type="number" class="form-control" [(ngModel)]="topping.qty" > -->
+
+        <input type="number" min="0" max="10" class="form-control" [(ngModel)]="topping.qty" 
+        [formControlName]="(prefix+topping.id)">
+      </div>
+
+      <button type="submit"
+      class="btn btn-primary"
+      [disabled]="pizzaForm.invalid">Submit</button>
+    </form>
+  
+
+  </div>
+  
+  
+
+</div>

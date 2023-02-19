@@ -1,0 +1,24 @@
+<div class="modal-body">
+    <div class="container">
+        <h2>Order Detail</h2>
+        <div>{{pizzaPrice | currency:'AUD'}}</div>
+        <div class="form-group">
+            <label for="store">Pizza</label>
+            <select #pizzaSelect class="form-select" [(ngModel)]="selectedPizzaId" (change)="onPizzaChange()"  >
+                <option *ngFor="let pizza of pizzas" [ngValue]="pizza.id">
+                    {{ pizza.pizzaName }}
+                </option>
+            </select>
+            <div>
+                {{ toppings }}
+            </div>
+        </div>
+
+        <div *ngFor="let topping of extraToppings">
+            <label  class="form-label">{{topping.toppingName}}</label>
+            <input type="number" min="0" max="10" class="form-control"  (change)="onToppingChange()" [(ngModel)]="topping.qty">
+        </div>
+
+        <button type="button" (click)="addToOrder()"  class="btn btn-primary">Add</button>   
+    </div>
+</div>

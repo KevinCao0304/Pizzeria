@@ -1,0 +1,20 @@
+<button type="button" class="btn btn-primary" (click)="add()">New store</button>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Store Name</th>
+        <th scope="col">Location</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let store of stores">
+        <th scope="row">{{store.id}}</th>
+        <td>{{store.storeName}}</td>
+        <td>{{store.location}}</td>
+        <td><a class="btn btn-default" [routerLink]="['../store/', store.id]">Edit</a></td>
+        <td><a class="btn btn-default" (click)="delete(store.id)">Delete</a></td>
+      </tr>
+    </tbody>
+</table>
+

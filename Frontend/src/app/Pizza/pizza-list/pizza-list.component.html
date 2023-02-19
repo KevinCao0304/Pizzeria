@@ -1,0 +1,38 @@
+<button type="button" class="btn btn-primary btn-sm" (click)="add(mymodal)">Add pizza</button>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Pizza Name</th>
+        <th scope="col">Toppings</th>
+        <th scope="col">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pizza of pizzas">
+        <th scope="row">{{pizza.id}}</th>
+        <td>{{pizza.pizzaName}}</td>
+        <td>{{pizza.toppings}}</td>
+        <td>{{pizza.price | currency:'AUD'}}</td>
+        <td><a class="btn btn-default" (click)="open(mymodal, pizza.id)">Edit</a></td>
+        <td><a class="btn btn-default" (click)="delete(pizza.id)">Delete</a></td>
+      </tr>
+    </tbody>
+</table>
+
+
+
+<ng-template #mymodal let-modal class="modal-lg">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Bootstrap Modal</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <app-pizza-detail [pizzaId]="pizzaId" [storeId]="storeId" (closeDetail)="modal.close('Save click');closeDetail()"></app-pizza-detail>
+
+</ng-template>
+
+
+
+

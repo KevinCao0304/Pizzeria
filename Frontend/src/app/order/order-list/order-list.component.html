@@ -1,0 +1,23 @@
+<button type="button" class="btn btn-primary" (click)="add()">New Order</button>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Full Name</th>
+        <th scope="col">Adress</th>
+        <th scope="col">Store Name</th>
+        <th scope="col">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders">
+        <th scope="row">{{order.id}}</th>
+        <td>{{order.fullName}}</td>
+        <td>{{order.adress}}</td>
+        <td>{{order.storeName}}</td>
+        <td>{{order.total | currency:'AUD'}}</td>
+        <td><a class="btn btn-default" [routerLink]="['../order/', order.id]">View</a></td>
+      </tr>
+    </tbody>
+</table>
+
